@@ -14,7 +14,7 @@ export class TodoController {
 
   @Post()
   createTask(@Body() task: createTaskDto) {
-    return this.todoService.createTask(task.title);
+    return this.todoService.createTask(task);
   }
 
   @Get('/:id')

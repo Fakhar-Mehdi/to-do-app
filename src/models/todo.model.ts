@@ -2,7 +2,8 @@ import mongoose, { Model } from 'mongoose';
 
 export interface ITodo {
   description: string;
-  createdAt: string;
+  createdAt?: string;
+  userId: mongoose.Types.ObjectId;
 }
 const todoSchema = new mongoose.Schema({
   description: {
@@ -14,6 +15,15 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: true,
   }, // date and time
+
+  isCompleted: {
+    type: Boolean,
+    default: false,
+  },
+  userId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
 });
 
 // const todoModel = mongoose.Model('Task', todoSchema);

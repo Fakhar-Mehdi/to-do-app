@@ -3,8 +3,9 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import todoModel, { ITodo } from './todo.model';
+import todoModel, { ITodo } from '../models/todo.model';
 import mongoose, { isObjectIdOrHexString } from 'mongoose';
+import userModel from 'src/models/user.model';
 
 @Injectable()
 export class TodoRepo {
@@ -20,8 +21,13 @@ export class TodoRepo {
     throw new NotFoundException(`For id: ${id}\nTask not found`);
   }
   async createTask(taskObject: ITodo) {
+    const { userId } = taskObject;
+    const user = await userModel.findById(userId);
+    if (!user) throw new BadRequestException("User Doesn't Exist");
     const task = new todoModel(taskObject);
     await task.save();
     return task;
   }
+  //make as completed
+  //delete task
 }

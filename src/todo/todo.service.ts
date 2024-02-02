@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { TodoRepo } from './todo.repo';
+import { TodoRepo } from '../database/todo.repo';
 import mongoose from 'mongoose';
+import { ITodo } from 'src/models/todo.model';
 
 @Injectable()
 export class TodoService {
@@ -11,9 +12,9 @@ export class TodoService {
   getTaskById(id: mongoose.Types.ObjectId) {
     return this.todoRepo.getTaskById(id);
   }
-  createTask(description: string) {
+  createTask(task: ITodo) {
     const taskObject = {
-      description,
+      ...task,
       createdAt: new Date().toTimeString(),
     };
     return this.todoRepo.createTask(taskObject);
