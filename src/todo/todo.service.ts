@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, Param } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { TodoRepo } from './todo.repo';
 import mongoose from 'mongoose';
 

@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { createTaskDto } from './dtos/create-task.dto';
 import mongoose from 'mongoose';
