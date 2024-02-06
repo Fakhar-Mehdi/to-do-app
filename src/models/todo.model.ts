@@ -3,6 +3,7 @@ import mongoose, { Model } from 'mongoose';
 export interface ITodo {
   description: string;
   createdAt?: string;
+  isCompleted?: boolean;
   userId: mongoose.Types.ObjectId;
 }
 const todoSchema = new mongoose.Schema({
@@ -26,6 +27,5 @@ const todoSchema = new mongoose.Schema({
   },
 });
 
-// const todoModel = mongoose.Model('Task', todoSchema);
 const todoModel: Model<ITodo> = mongoose.model<ITodo>('Task', todoSchema);
 export default todoModel;

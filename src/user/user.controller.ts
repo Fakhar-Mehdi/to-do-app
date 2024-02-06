@@ -1,22 +1,20 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Put } from '@nestjs/common';
 import { UserService } from './user.service';
-import mongoose from 'mongoose';
-import { CreateUserDto } from './dtos/create-user.dto';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
   @Get()
-  getAllUsers() {
-    return this.userService.getAllUsers();
+  getUser(@Body() userData: UpdateUserDto) {
+    return this.userService.getUserById(userData.userId);
   }
-  @Get('/:id')
-  getUserById(@Param('id') id: mongoose.Types.ObjectId) {
-    return this.userService.getUserById(id);
+  @Put()
+  async updateUser(@Body() userData: UpdateUserDto) {
+    return this.userService.updateUser(userData);
   }
-
-  @Post()
-  createUser(@Body() user: CreateUserDto) {
-    return this.userService.createUser(user);
+  @Delete()
+  async deleteUser(@Body() userData: UpdateUserDto) {
+    return this.userService.deleteUser(userData.userId);
   }
 }

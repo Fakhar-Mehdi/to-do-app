@@ -1,9 +1,15 @@
 import mongoose, { Model } from 'mongoose';
-
 export interface IUser {
   username: string;
   password: string;
 }
+
+export interface IUpdateUser {
+  username?: string;
+  password?: string;
+  userId?: mongoose.Types.ObjectId;
+}
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,

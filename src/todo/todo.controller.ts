@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { createTaskDto } from './dtos/create-task.dto';
 import mongoose from 'mongoose';
@@ -8,8 +16,8 @@ export class TodoController {
   constructor(private todoService: TodoService) {}
 
   @Get()
-  getAllTasks() {
-    return this.todoService.getAllTasks();
+  getAllTasks(@Body() body: any) {
+    return this.todoService.getAllTasksByProperty(body.userId);
   }
 
   @Post()
@@ -18,7 +26,23 @@ export class TodoController {
   }
 
   @Get('/:id')
-  getTaskById(@Param('id') id: mongoose.Types.ObjectId) {
-    return this.todoService.getTaskById(id);
+  getTaskById(@Param('id') taskId: mongoose.Types.ObjectId, @Body() body: any) {
+    return this.todoService.getTaskById(body.userId, taskId);
+  }
+
+  @Put('/:id')
+  async updateTask(
+    @Param('id') taskId: mongoose.Types.ObjectId,
+    @Body() taskData: any,
+  ) {
+    return this.todoService.updateTask(taskId, taskData);
+  }
+
+  @Delete('/:id')
+  async deleteTask(
+    @Param('id') taskId: mongoose.Types.ObjectId,
+    @Body() body: any,
+  ) {
+    return this.todoService.deleteTask(taskId, body.userId);
   }
 }
