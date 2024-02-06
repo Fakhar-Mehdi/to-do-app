@@ -1,9 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { TodoModule } from './todo/todo.module';
 import { ValidationPipe } from '@nestjs/common';
 import mongoose from 'mongoose';
 import { configDotenv } from 'dotenv';
-import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 
 async function bootstrap() {
@@ -17,4 +15,8 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`Connected to MongoDB.\nServer listening to port ${port}`);
 }
+console.log('aaaaaaaaaaaa gyaaaaaaa');
+
 bootstrap();
+
+console.log('hooooooooooooooo gyaaaaaaa');
